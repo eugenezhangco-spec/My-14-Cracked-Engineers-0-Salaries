@@ -48,7 +48,7 @@ When in doubt, ask. When multiple people are needed, they each check in.
 ## Build Pipeline
 
 ```
-/status → /inbox → /pull → /plan → BUILD → /devils-advocate → /review → /verify → /update
+/status → /inbox → /pull → /plan → BUILD → [Aisha: QA auto-runs] → /update
 ```
 
 1. `/status` — where are we? Read STATUS.md, check inbox and sessions.
@@ -56,10 +56,8 @@ When in doubt, ask. When multiple people are needed, they each check in.
 3. `/pull` — load brainstorm handoff from `context/sessions/`.
 4. `/plan` (Jake + Sara) — break work into tasks. **No code before approval.**
 5. Build (Max + Liam) — tests first, then code. Reconcile against plan.
-6. `/devils-advocate` — two engineers debate the diff across six dimensions.
-7. `/review` (Nina + Elena) — security + quality checklist. APPROVE / WARNING / BLOCK.
-8. `/verify` — run tests + check every acceptance criterion. PASS / PARTIAL / FAIL.
-9. `/update` — save everything to STATUS.md. Never skip.
+6. **QA (Aisha — automatic)** — runs immediately after reconciliation returns CLEAN. No triggering needed. Full chain: tests → investigation → code review → plan verification → **SHIP or HOLD**. If HOLD, fixes and re-runs. If SHIP, hands to `/update`.
+7. `/update` — save everything to STATUS.md. Never skip.
 
 **Periodic:** `/audit` | `/pipeline` | `/deploy` | `/milestone`
 

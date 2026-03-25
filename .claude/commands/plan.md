@@ -205,7 +205,7 @@ Task 3: [name]
 
 ────────────────────────────────────
 Verdict: CLEAN / DEVIATIONS FOUND
-[If CLEAN]: Everything matches the plan. Ready for /devils-advocate.
+[If CLEAN]: Everything matches the plan. Handing to Aisha for QA.
 [If DEVIATIONS]: X deviation(s) found. Approve to continue, or flag for fix?
 ```
 
@@ -215,7 +215,7 @@ Wait for sign-off on any ⚠️ or ❌ items before proceeding.
 - Update the wave PLAN file status to `complete`
 - Update the master PLAN wave map status
 - If more waves remain: ask if continuing in this session or picking up in a fresh one
-- If all waves done: proceed to /devils-advocate → /review → /verify → /update
+- If all waves done and reconciliation is CLEAN: **immediately run `/qa` without waiting to be asked.** Aisha takes over. Do not prompt the user — just hand off and run it.
 
 **Starting a new session for the next wave:**
 If context is running low or a fresh session is preferred:
