@@ -1,5 +1,5 @@
 ---
-description: Full autonomous QA chain. Runs automatically after every build. Tests → Devil's Advocate → Code Review → Plan Verification → SHIP or HOLD verdict.
+description: Full autonomous QA chain. Runs automatically after every build. Tests → Investigation → Code Review → Plan Verification → Human Check → SHIP or HOLD verdict.
 ---
 
 # /qa — Autonomous QA Chain
@@ -84,26 +84,56 @@ A criterion passes when there is evidence. A description of what was built is no
 
 ---
 
-## Step 5 — Verdict
+## Step 5 — Human check (mandatory before verdict)
 
-Issue exactly one of:
+Automated checks can verify code. They cannot verify whether what was built is actually what the person wanted, looks right, or feels right to a real user. That requires human eyes.
 
-**SHIP** — All tests pass. No BLOCK findings. All acceptance criteria verified with evidence. Safe to push.
+After Steps 1-4 pass, generate a short list of things for the human to go and check themselves. Derive these directly from the PLAN file acceptance criteria and the code changes — never use generic placeholders.
 
-**HOLD** — State the single most important blocking issue in one sentence. State the file and line. Do not issue HOLD for warnings or minor issues — only for things that would break the product or expose a security risk.
+**How to write the checks:**
+- Read the acceptance criteria from the PLAN file
+- Read the user-facing behavior that was just built
+- Write 3-5 checks in plain English: what to do, what to look for, what "correct" looks like
+- If the project has a running app, say where to look (e.g. "open the app and try X")
+- If there's no UI, describe what to confirm in the data, logs, or output
+
+**Format:**
+
+> **Aisha here — automated checks passed. Before I can issue SHIP, I need you to verify this yourself:**
+>
+> 1. [Specific thing to do or look at — derived from what was just built]
+> 2. [Second check]
+> 3. [Third check — ideally an edge case or error state]
+>
+> Try those. Tell me what you see. If everything looks right, I'll issue SHIP.
+
+**Then wait.** Do not issue a verdict until the human responds.
+
+If they say it looks good → issue **SHIP**.
+If they report something wrong → treat it as a HOLD finding, fix it, re-run from Step 1.
+
+---
+
+## Step 6 — Verdict
+
+Only reached after the human has confirmed Step 5.
+
+**SHIP** — All automated checks passed. Human confirmed the build looks correct. Safe to push.
+
+**HOLD** — Something failed in automated checks OR the human flagged something wrong. State the single most important blocking issue in one sentence. Fix it. Re-run from Step 1.
 
 ---
 
 ## After SHIP
 
-Say: "**Aisha here — SHIP.** All checks passed. Run `/update` to close out the session."
+Say: "**Aisha here — SHIP.** Automated checks passed, you've verified it yourself. Run `/update` to close out the session."
 
 ## After HOLD
 
-State the issue clearly. Fix it. Then re-run `/qa` from Step 1. Do not push until SHIP.
+State the issue. Fix it. Re-run `/qa` from Step 1. Do not push until SHIP.
 
 ---
 
 ## The rule that cannot be broken
 
-The human pushes when you say SHIP. That means SHIP must mean something. If you are not confident, say HOLD and explain why. A false SHIP that ships broken code is worse than a false HOLD that delays five minutes.
+SHIP requires two things: automated evidence AND human confirmation. Not one or the other. A non-technical person building real products needs to see what they built before it ships. That's not optional.
