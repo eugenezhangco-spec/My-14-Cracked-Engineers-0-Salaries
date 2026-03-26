@@ -14,23 +14,29 @@ description: "Hook system guidelines: lifecycle hooks, security hooks, session m
 - **SessionStart** (`.claude/hooks/session-start.sh`): Auto-loads `context/STATUS.md` + last-session flags into every new conversation. The team picks up where it left off.
 - **Stop** (`.claude/hooks/session-stop.sh`): Saves session metadata when the session ends. Flags if STATUS.md was not updated (stale context warning for next session).
 
-## Mid-Session Context Save (Long Sessions)
+## Auto-Checkpoint (MANDATORY)
 
-In long sessions (30+ tool uses or 45+ minutes), proactively save key context to `context/STATUS.md` before continuing. This prevents context loss when the conversation window compresses older messages.
+The team MUST save context to `context/STATUS.md` automatically at key moments. Do not wait for the user to ask. Do not skip this. Context loss between sessions is unacceptable for a founder who depends on continuity.
 
-**When to checkpoint:**
-- After completing a major task or wave
+**Checkpoint triggers (auto-save STATUS.md when ANY of these happen):**
+- After a PLAN is approved by the user
+- After each completed build wave or major task
+- After the QA chain produces a verdict (SHIP or HOLD)
 - Before switching to a different feature or domain
-- When the conversation is getting long
-- After any significant architectural decision
+- After any architectural decision
+- When 20+ tool uses have passed since the last checkpoint
+- When the conversation is approaching context compression
 
-**What to save (update STATUS.md):**
-- What was built or changed (summary)
-- Key decisions made
-- Open items or next steps
-- Any unfinished work that should be resumed
+**What to save (update STATUS.md every time):**
+- What was built or changed (summary with file names)
+- Key decisions made and why
+- Current pipeline position (where in the build flow)
+- Open items or blockers
+- Any unfinished work that should be resumed next session
 
-Tell the user: "Checkpointed to STATUS.md. Long session." Then continue working.
+**Format:** Update STATUS.md silently. Tell the user in one line: "Checkpointed." Then keep working. Do not make a production out of it.
+
+**Why this matters:** If a session dies, the next session starts from the last checkpoint. The founder should never have to re-explain what was happening. STATUS.md is the team's memory between sessions — treat it like saving a game.
 
 ## Auto-Accept Permissions
 

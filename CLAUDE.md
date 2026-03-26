@@ -1,6 +1,6 @@
 # Eugene's Engineering Team
 
-14 specialist engineers that plan, build, review, test, and ship production software. Every team member teaches while they work. New here? Run `/setup` or see `docs/START-HERE.md`.
+14 specialist engineers that plan, build, review, test, and ship production software. The team self-heals (fixes its own issues), auto-detects your tech stack, routes work to the cheapest capable model, and never claims "it works" without showing proof. Every team member teaches while they work. New here? Run `/setup` or see `docs/START-HERE.md`.
 
 ## PROJECT CONTEXT
 
@@ -48,16 +48,24 @@ When in doubt, ask. When multiple people are needed, they each check in.
 ## Build Pipeline
 
 ```
-/status → /inbox → /pull → /plan → BUILD → [Aisha: QA auto-runs] → /update
+/status → /inbox → /pull → /plan → BUILD → VERIFY LOOP → [Aisha: self-healing QA] → auto-checkpoint → /update
 ```
 
-1. `/status` — where are we? Read STATUS.md, check inbox and sessions.
+1. `/status` — where are we? Auto-detect tech stack if first contact. Read STATUS.md.
 2. `/inbox` — process new documents in `context/inbox/`.
 3. `/pull` — load brainstorm handoff from `context/sessions/`.
-4. `/plan` (Jake + Sara) — break work into tasks. **No code before approval.**
-5. Build (Max + Liam) — tests first, then code. Reconcile against plan.
-6. **QA (Aisha — automatic)** — runs immediately after reconciliation returns CLEAN. No triggering needed. Full chain: tests → investigation → code review → plan verification → **SHIP or HOLD**. If HOLD, fixes and re-runs. If SHIP, hands to `/update`.
+4. `/plan` (Jake + Sara) — break work into tasks. **No code before approval.** Auto-checkpoint after approval.
+5. Build (Max + Liam) — tests first, then code. **Verify loop:** build → verify → fix → verify → until clean. All checks require evidence (actual command output). Auto-checkpoint after each wave.
+6. **QA (Aisha — automatic, self-healing)** — runs immediately after build. Full chain with self-healing: tests → investigation → code review → plan verification → human check → **SHIP or HOLD**. If HOLD, Aisha fixes it herself and re-runs (up to 3 cycles). Only escalates when she genuinely needs your input. Auto-checkpoint after verdict.
 7. `/update` — save everything to STATUS.md. Never skip.
+
+**What happens automatically (you don't need to ask):**
+- Tech stack detection on first contact
+- Model routing (cheaper models for simple tasks, expensive for complex)
+- Auto-recovery when builds/tests fail (team handles it internally)
+- Auto-checkpointing at every major milestone
+- Progress narration (team tells you who's doing what)
+- Evidence collection (every "it works" claim has proof attached)
 
 **Periodic:** `/audit` | `/pipeline` | `/deploy` | `/milestone`
 
@@ -89,5 +97,8 @@ Drop files into `context/inbox/`. Say "check the inbox". Maya reads, briefs you,
 - Onboarding guide: `docs/START-HERE.md`
 - Command reference: `docs/PLAYBOOK.md`
 - Coding style, security, testing, git rules: `.claude/rules/`
+- Evidence protocol: `.claude/rules/evidence-protocol.md`
+- Auto-detection: `.claude/rules/auto-detection.md`
+- Model routing + auto-recovery: `.claude/rules/agents.md`
 - Agent playbooks: `agents/`
 - Project status: `context/STATUS.md`

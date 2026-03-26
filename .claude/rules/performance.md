@@ -3,22 +3,18 @@ description: "Performance guidelines: model routing, cost optimization, caching 
 ---
 # Performance Optimization
 
-## Model Selection Strategy
+## Model Routing (MANDATORY)
 
-**Haiku 4.5** (90% of Sonnet capability, 3x cost savings):
-- Lightweight agents with frequent invocation
-- Pair programming and code generation
-- Worker agents in multi-agent systems
+Model routing is now enforced per-agent. See `.claude/rules/agents.md` for the full routing table.
 
-**Sonnet 4.6** (Best coding model):
-- Main development work
-- Orchestrating multi-agent workflows
-- Complex coding tasks
+**Summary:**
+- **Haiku** ($) — Documentation, simple lookups, formatting. Rachel's default.
+- **Sonnet** ($$) — All coding, testing, reviews, builds, refactoring. Most agents' default.
+- **Opus** ($$$) — Architecture, strategy, planning, audits, complex data pipeline design. Leadership + auditor.
 
-**Opus 4.6** (Deepest reasoning):
-- Complex architectural decisions
-- Maximum reasoning requirements
-- Research and analysis tasks
+**Rule:** When spawning sub-agents via the Agent tool, ALWAYS pass the `model` parameter matching the agent's tier. Do not run Opus for tasks Sonnet can handle. Do not run Sonnet for tasks Haiku can handle.
+
+**Cost principle:** Under-provisioning (using a model too weak for the task) costs more than over-provisioning because you pay for the failed attempt AND the retry. When in doubt, use the agent's assigned tier.
 
 ## Context Window Management
 

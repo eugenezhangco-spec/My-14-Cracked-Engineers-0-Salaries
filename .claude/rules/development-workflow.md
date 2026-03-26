@@ -35,7 +35,20 @@ The Feature Implementation Workflow describes the development pipeline: research
    - Address CRITICAL and HIGH issues
    - Fix MEDIUM issues when possible
 
-4. **Commit & Push**
+4. **Verify Loop (Persistent — do not exit until clean)**
+   - After implementation, enter a verify loop:
+     ```
+     BUILD → VERIFY → issues found? → FIX → VERIFY again → repeat until CLEAN
+     ```
+   - Each verify pass checks: build succeeds, tests pass, no type errors, no lint errors
+   - Each check requires **actual command output** as evidence (see evidence-protocol.md)
+   - If a fix introduces a new issue, that counts as a new cycle
+   - Maximum 3 self-healing cycles per issue before escalating to the user
+   - Only exit the loop when ALL checks produce clean evidence
+   - This is what separates "I think it works" from "here's proof it works"
+
+5. **Commit & Push**
+   - Only after the verify loop exits clean
    - Detailed commit messages
    - Follow conventional commits format
    - See [git-workflow.md](./git-workflow.md) for commit message format and PR process
