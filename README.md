@@ -2,7 +2,7 @@
 
 **An AI engineering team that builds production-grade software. You describe what you want. 14 specialists plan, build, test, review, and ship it.**
 
-I built this with no CS degree. I have a Master's in Accounting and Financial Management. Today I use this exact team to build and sell software solutions worth tens of thousands to hundreds of thousands of dollars — and growing. This is the same system I use every day, open-sourced so you can do the same.
+I built this with no CS degree. I have a Master's in Accounting and Financial Management. Today I use this exact team to build and sell software solutions worth tens of thousands to hundreds of thousands of dollars — and growing. This is the same system I use every day, now available so you can do the same.
 
 ---
 
@@ -208,4 +208,4 @@ If this saves you time or makes you money, a star or a follow goes a long way.
 
 ## License
 
-MIT — use it, copy it, modify it, sell what you build with it.
+Proprietary — personal use only. You may use and modify the Software for your own personal or business purposes. Redistribution, reselling, and public posting are not permitted. See [LICENSE](LICENSE) for full terms.

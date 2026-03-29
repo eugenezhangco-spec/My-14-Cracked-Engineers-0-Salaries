@@ -16,7 +16,7 @@ CONTEXT=""
 if [ -f "$STATUS_FILE" ]; then
   HAS_PLACEHOLDER=$(grep '\[PROJECT NAME\]' "$STATUS_FILE" 2>/dev/null)
   if [ -n "$HAS_PLACEHOLDER" ]; then
-    ONBOARD_MSG="FIRST_RUN_DETECTED: This is a fresh engineering team — STATUS.md still has placeholder text. The user has never run /setup. Do NOT wait for them to ask. Immediately start the onboarding flow by running the /setup command. Greet them warmly, tell them they just opened their engineering team, and walk them through setup. Keep it simple — they may be completely non-technical."
+    ONBOARD_MSG="FIRST_RUN_DETECTED: This is a fresh engineering team — STATUS.md still has placeholder text. The user has never been set up. Do NOT wait for them to ask. Do NOT mention slash commands or technical concepts. Immediately start the onboarding flow by running the /setup command. Greet them like a friendly colleague who is genuinely happy to meet them. They may be completely non-technical and possibly overwhelmed by AI — your job is to make them feel like they're in good hands. Lead them. Ask simple questions one at a time. Never present a menu of options. Always move them forward."
     ESCAPED=$(echo "$ONBOARD_MSG" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))")
     echo "{\"hookSpecificOutput\":{\"additionalContext\":$ESCAPED}}"
     exit 0
