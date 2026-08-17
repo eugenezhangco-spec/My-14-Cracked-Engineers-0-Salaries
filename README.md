@@ -1,5 +1,14 @@
 # My 14 Cracked Engineers, 0 Salaries
 
+> **Archived.** This was the first version of the engineering team, and it is where the
+> idea started. It is no longer maintained.
+>
+> The maintained version is **[foreman](https://github.com/eugenezhangco-spec/foreman)** —
+> the same fourteen engineers, rebuilt as a proper Claude Code plugin. Two commands to
+> install, one to update, and the agents now say what they are doing as they work.
+>
+> Nothing here is deleted. Read it, fork it, take what is useful.
+
 **You talk. They build. 14 AI specialists that plan, build, test, review, and ship production software.**
 
 Built by a non-technical founder with no CS degree. This is the same system used to build and sell software solutions worth hundreds of thousands to millions of dollars. Now available so you can do the same.
